@@ -22,7 +22,7 @@ if (!$result) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,22 +35,20 @@ if (!$result) {
             color: white;
             text-align: center;
         }
-
         .table-bg {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px 15px 0 0;
         }
-
         .box-search {
             display: flex;
             justify-content: center;
             gap: .1%;
         }
-
-        .inactive-row {
+        .low-quantity {
             background-color: red !important;
         }
-    </style></head>
+    </style>
+</head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
         <div class="container-fluid">
@@ -68,16 +66,13 @@ if (!$result) {
     <br>
     <div class="box-search">
         <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
-        <br>
         <button type="button" onclick="window.location.href='hub.html'" class="btn btn-secondary">Voltar ao Hub</button>
-        <br>
         <button onclick="searchData()" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
         </button>
     </div>
-    <br>
     <div class="m-5">
         <table class="table text-white table-bg">
             <thead>
@@ -138,21 +133,21 @@ if (!$result) {
     });
 
     function searchData() {
-        window.location = 'sistema.php?search=' + search.value;
+        window.location = 'prods.php?search=' + search.value;
     }
 
-    function hideProduct(productId) {
-        if (confirm('Deseja ocultar este produto?')) {
+    function hideProduct(idprod) {
+        if (confirm("Tem certeza de que deseja ocultar este produto?")) {
             $.ajax({
-                url: 'hide_product.php',
+                url: 'hideproduct.php',
                 type: 'POST',
-                data: { idprod: productId },
+                data: { idprod: idprod },
                 success: function(response) {
-                    alert('Produto ocultado com sucesso!');
-                    location.reload();
+                    console.log(response); 
+                    location.reload(); 
                 },
                 error: function(xhr, status, error) {
-                    alert('Ocorreu um erro ao ocultar o produto: ' + error);
+                    console.error(xhr.responseText); 
                 }
             });
         }
