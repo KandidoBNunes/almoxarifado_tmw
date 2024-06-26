@@ -91,23 +91,23 @@ if (!empty($_GET['idnew_table'])) {
             outline: none;
             font-size: 15px;
         }
-        #submit {
+        #submit, #voltar {
             background-image: linear-gradient(to right, rgb(0, 92, 197), rgb(90, 20, 220));
             width: 100%;
             border: none;
             padding: 15px;
-            color: white;
+            color: rgb(255, 255, 255);
             font-size: 15px;
             cursor: pointer;
             border-radius: 10px;
+            margin-top: 10px;
         }
-        #submit:hover {
-            background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80, 19, 195));
+        #submit:hover, #voltar:hover {
+            background-image: linear-gradient(to right, rgb(0, 255, 0), rgb(0, 255, 0));
         }
     </style>
 </head>
 <body>
-    <a href="sistema.php">Voltar</a>
     <div class="box">
         <form action="saveedit.php" method="POST">
             <fieldset>
@@ -161,6 +161,7 @@ if (!empty($_GET['idnew_table'])) {
                 <br><br>
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <input type="submit" name="update" id="submit">
+                <button type="button" id="voltar" onclick="window.location.href='sistema.php'">Voltar</button>
             </fieldset>
         </form>
     </div>
